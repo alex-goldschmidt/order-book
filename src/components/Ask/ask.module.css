@@ -1,0 +1,10 @@
+.PriceQuantityContainer {
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+}
+
+.BidContainer {
+  border: 1px solid gray;
+  min-width: 300px;
+}
