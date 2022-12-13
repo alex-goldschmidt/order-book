@@ -1,35 +1,59 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import styles from "./ask.module.css";
 
 const BestAsk = () => {
   const [selectedAsk, setSelectedAsk] = useState("BTC-USD");
+  const [previousCurrency, setPreviousCurrency] = useState(null);
   const [AskPrice, setAskPrice] = useState("");
   const [AskQuantity, setAskQuantity] = useState("");
+  const ws = useRef(null);
 
   const handleChange = (e) => {
+    setPreviousCurrency(selectedAsk);
     setSelectedAsk(e.target.value);
   };
 
   useEffect(
     () => {
-      const FetchAsks = async () => {
-        const options = {
-          method: "GET",
-          headers: { accept: "application/json" },
+      if (ws.current) {
+        // unsubscribe from the previous currency
+        let msg = {
+          type: "unsubscribe",
+          product_ids: [previousCurrency],
+          channels: ["ticker"],
         };
+        let jsonMsg = JSON.stringify(msg);
+        ws.current.send(jsonMsg);
+        console.log(jsonMsg);
+      }
 
-        const GetData = await fetch(
-          `https://api.exchange.coinbase.com/products/${selectedAsk}/book`,
-          options
-        );
-        const AskData = await GetData.json();
-        console.log(AskData);
-        setAskPrice(AskData.asks[0][0]); //Price
-        setAskQuantity(AskData.asks[0][1]); //Quantity
+      ws.current = new WebSocket("wss://ws-feed.pro.coinbase.com");
+      ws.current.onopen = () => {
+        let msg = {
+          type: "subscribe",
+          product_ids: [selectedAsk],
+          channels: ["ticker"],
+        };
+        let jsonMsg = JSON.stringify(msg);
+        ws.current.send(jsonMsg);
+        console.log(jsonMsg);
       };
-      FetchAsks();
+
+      ws.current.onmessage = (e) => {
+        let data = JSON.parse(e.data);
+        if (data.type !== "ticker") {
+          return;
+        }
+        if (data.product_id === selectedAsk) {
+          setAskPrice(data.best_ask);
+          setAskQuantity(data.best_ask_size);
+        }
+      };
+
+      //dependency array is passed currency state, will run on any currency state change
     },
-    [selectedAsk],
+    [previousCurrency, selectedAsk],
+    [AskPrice],
     [AskQuantity]
   );
 
