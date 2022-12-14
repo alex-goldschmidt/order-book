@@ -1,6 +1,7 @@
 import "./App.css";
 import BestBid from "./components/Bid";
 import BestAsk from "./components/Ask";
+import PriceChart from "./components/Chart";
 import { useState, useRef, useEffect } from "react";
 import React from "react";
 
@@ -123,20 +124,25 @@ const App = () => {
 
   return (
     <div className="App">
-      <BestBid
-        onChange={handleBidCurrencyChange}
-        selectedBidCurrency={selectedBidCurrency}
-        previousBidCurrency={previousBidCurrency}
-        BidPrice={BidPrice}
-        BidQuantity={BidQuantity}
-      />
-      <BestAsk
-        onChange={handleAskCurrencyChange}
-        selectedAskCurrency={selectedAskCurrency}
-        previousAskCurrency={previousAskCurrency}
-        AskPrice={AskPrice}
-        AskQuantity={AskQuantity}
-      />
+      <div className="BidAskContainer">
+        <BestBid
+          onChange={handleBidCurrencyChange}
+          selectedBidCurrency={selectedBidCurrency}
+          previousBidCurrency={previousBidCurrency}
+          BidPrice={BidPrice}
+          BidQuantity={BidQuantity}
+        />
+        <BestAsk
+          onChange={handleAskCurrencyChange}
+          selectedAskCurrency={selectedAskCurrency}
+          previousAskCurrency={previousAskCurrency}
+          AskPrice={AskPrice}
+          AskQuantity={AskQuantity}
+        />
+      </div>
+      <div className="chartContainer">
+        <PriceChart BidPrice={BidPrice} AskPrice={AskPrice} />
+      </div>
     </div>
   );
 };

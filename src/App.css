@@ -1,6 +1,16 @@
 .App {
   text-align: center;
+  margin-top: 30px;
+}
+
+.BidAskContainer {
   display: flex;
   justify-content: space-around;
-  margin-top: 30px;
+  min-height: 150px;
+}
+
+.chartContainer {
+  padding-top: 50px;
+  width: 900px;
+  margin: auto;
 }

@@ -3,7 +3,7 @@ import styles from "./ask.module.css";
 const BestAsk = ({ onChange, selectedAskCurrency, AskPrice, AskQuantity }) => {
   return (
     <div className={styles.BidContainer}>
-      Best Bid for
+      Best Ask for
       <select value={selectedAskCurrency} onChange={onChange}>
         <option value="BTC-USD">BTC-USD</option>
         <option value="ETH-USD">ETH-USD</option>
