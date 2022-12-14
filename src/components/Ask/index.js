@@ -1,66 +1,10 @@
-import { useState, useEffect, useRef } from "react";
 import styles from "./ask.module.css";
 
-const BestAsk = () => {
-  const [selectedAsk, setSelectedAsk] = useState("BTC-USD");
-  const [previousCurrency, setPreviousCurrency] = useState(null);
-  const [AskPrice, setAskPrice] = useState("");
-  const [AskQuantity, setAskQuantity] = useState("");
-  const ws = useRef(null);
-
-  const handleChange = (e) => {
-    setPreviousCurrency(selectedAsk);
-    setSelectedAsk(e.target.value);
-  };
-
-  useEffect(
-    () => {
-      if (ws.current) {
-        // unsubscribe from the previous currency
-        let msg = {
-          type: "unsubscribe",
-          product_ids: [previousCurrency],
-          channels: ["ticker"],
-        };
-        let jsonMsg = JSON.stringify(msg);
-        ws.current.send(jsonMsg);
-        console.log(jsonMsg);
-      }
-
-      ws.current = new WebSocket("wss://ws-feed.pro.coinbase.com");
-      ws.current.onopen = () => {
-        let msg = {
-          type: "subscribe",
-          product_ids: [selectedAsk],
-          channels: ["ticker"],
-        };
-        let jsonMsg = JSON.stringify(msg);
-        ws.current.send(jsonMsg);
-        console.log(jsonMsg);
-      };
-
-      ws.current.onmessage = (e) => {
-        let data = JSON.parse(e.data);
-        if (data.type !== "ticker") {
-          return;
-        }
-        if (data.product_id === selectedAsk) {
-          setAskPrice(data.best_ask);
-          setAskQuantity(data.best_ask_size);
-        }
-      };
-
-      //dependency array is passed currency state, will run on any currency state change
-    },
-    [previousCurrency, selectedAsk],
-    [AskPrice],
-    [AskQuantity]
-  );
-
+const BestAsk = ({ onChange, selectedAskCurrency, AskPrice, AskQuantity }) => {
   return (
     <div className={styles.BidContainer}>
       Best Bid for
-      <select value={selectedAsk} onChange={handleChange}>
+      <select value={selectedAskCurrency} onChange={onChange}>
         <option value="BTC-USD">BTC-USD</option>
         <option value="ETH-USD">ETH-USD</option>
         <option value="LTC-USD">LTC-USD</option>
