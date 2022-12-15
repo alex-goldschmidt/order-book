@@ -2,6 +2,7 @@ import "./App.css";
 import BestBid from "./components/Bid";
 import BestAsk from "./components/Ask";
 import PriceChart from "./components/Chart";
+import Ladder from "./components/Ladder";
 import { useState, useRef, useEffect } from "react";
 import React from "react";
 
@@ -143,6 +144,12 @@ const App = () => {
       <div className="chartContainer">
         <PriceChart BidPrice={BidPrice} AskPrice={AskPrice} />
       </div>
+      <Ladder
+        BidPrice={BidPrice}
+        AskPrice={AskPrice}
+        selectedBidCurrency={selectedBidCurrency}
+        selectedAskCurrency={selectedAskCurrency}
+      />
     </div>
   );
 };
