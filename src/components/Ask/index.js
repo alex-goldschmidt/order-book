@@ -4,11 +4,23 @@ const BestAsk = ({ onChange, selectedAskCurrency, AskPrice, AskQuantity }) => {
   return (
     <div className={styles.AskContainer}>
       Best Ask for
-      <select value={selectedAskCurrency} onChange={onChange}>
-        <option value="BTC-USD">BTC-USD</option>
-        <option value="ETH-USD">ETH-USD</option>
-        <option value="LTC-USD">LTC-USD</option>
-        <option value="BCH-USD">BCH-USD</option>
+      <select
+        data-testid="select"
+        value={selectedAskCurrency}
+        onChange={onChange}
+      >
+        <option data-testid="option-1" value="BTC-USD">
+          BTC-USD
+        </option>
+        <option data-testid="option-2" value="ETH-USD">
+          ETH-USD
+        </option>
+        <option data-testid="option-3" value="LTC-USD">
+          LTC-USD
+        </option>
+        <option data-testid="option-4" value="BCH-USD">
+          BCH-USD
+        </option>
       </select>
       <div className={styles.PriceQuantityContainer}>
         <div className={styles.price}>

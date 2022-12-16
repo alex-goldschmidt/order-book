@@ -28,11 +28,10 @@ const App = () => {
         let msg = {
           type: "unsubscribe",
           product_ids: [previousBidCurrency],
-          channels: ["ticker"],
+          channels: ["ticker"], //level2
         };
         let jsonMsg = JSON.stringify(msg);
         wsBid.current.send(jsonMsg);
-        console.log(jsonMsg);
       }
 
       wsBid.current = new WebSocket("wss://ws-feed.pro.coinbase.com");
@@ -40,20 +39,20 @@ const App = () => {
         let msg = {
           type: "subscribe",
           product_ids: [selectedBidCurrency],
-          channels: ["ticker"],
+          channels: ["ticker"], //level2
         };
         let jsonMsg = JSON.stringify(msg);
         wsBid.current.send(jsonMsg);
-        console.log(jsonMsg);
       };
 
       wsBid.current.onmessage = (e) => {
         let data = JSON.parse(e.data);
         if (data.type !== "ticker") {
+          //l2update
           return;
         }
         if (data.product_id === selectedBidCurrency) {
-          setBidPrice(data.best_bid);
+          setBidPrice(data.best_bid); //data.changes[0][1]
           setBidQuantity(data.best_bid_size);
         }
       };
@@ -90,7 +89,6 @@ const App = () => {
         };
         let jsonMsg = JSON.stringify(msg);
         wsAsk.current.send(jsonMsg);
-        console.log(jsonMsg);
       }
 
       wsAsk.current = new WebSocket("wss://ws-feed.pro.coinbase.com");
@@ -102,7 +100,6 @@ const App = () => {
         };
         let jsonMsg = JSON.stringify(msg);
         wsAsk.current.send(jsonMsg);
-        console.log(jsonMsg);
       };
 
       wsAsk.current.onmessage = (e) => {
