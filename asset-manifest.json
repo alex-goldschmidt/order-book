@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/order-book/static/css/main.8dfed280.css",
+    "main.js": "/order-book/static/js/main.cbb2dbf6.js",
+    "index.html": "/order-book/index.html",
+    "main.8dfed280.css.map": "/order-book/static/css/main.8dfed280.css.map",
+    "main.cbb2dbf6.js.map": "/order-book/static/js/main.cbb2dbf6.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.8dfed280.css",
+    "static/js/main.cbb2dbf6.js"
+  ]
+}
