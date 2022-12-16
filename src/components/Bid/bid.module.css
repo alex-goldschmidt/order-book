@@ -7,4 +7,6 @@
 .BidContainer {
   border: 1px solid gray;
   min-width: 300px;
+  color: white;
+  background: #06c9f7;
 }

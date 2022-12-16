@@ -146,7 +146,9 @@ const App = () => {
       </div>
       <Ladder
         BidPrice={BidPrice}
+        BidQuantity={BidQuantity}
         AskPrice={AskPrice}
+        AskQuantity={AskQuantity}
         selectedBidCurrency={selectedBidCurrency}
         selectedAskCurrency={selectedAskCurrency}
       />

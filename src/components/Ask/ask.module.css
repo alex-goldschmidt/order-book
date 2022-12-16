@@ -4,7 +4,9 @@
   justify-content: center;
 }
 
-.BidContainer {
+.AskContainer {
   border: 1px solid gray;
   min-width: 300px;
+  background: #ffaf00;
+  color: white;
 }
