@@ -1,6 +1,31 @@
-# Getting Started with Create React App
+Order book is a project that tracks the list of orders to buy or sell a particular security or financial instrument. It is organized by price level.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+To view the live project, [click here](https://alex-goldschmidt.github.io/order-book/)
+
+## Tech
+
+Order Book uses a number of technologies to work properly:
+
+- React
+- Material UI
+- HTML
+- CSS
+- Jest
+
+## Installation
+
+Order Book requires the user to clone this repository and run it on there local server.
+
+Clone the repository by clicking SSH and copying the line below it.
+
+![image](https://user-images.githubusercontent.com/83550948/209895135-40f839e2-bc43-4e98-bee8-f0c42a2a5cfb.png)
+
+From there, run the commands below in your favorite terminal
+
+```
+git clone git@github.com:alex-goldschmidt/order-book.git
+cd ./order-book
+```
 
 ## Available Scripts
 
